@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Pétala/folha — orgânico vegetal -->
+  <path d="M50 12 Q72 30, 72 56 Q72 82, 50 88 Q28 82, 28 56 Q28 30, 50 12 Z" stroke="#8B9D83" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.8"/>
+  <path d="M50 18 L50 82" stroke="#8B9D83" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+</svg>

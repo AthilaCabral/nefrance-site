@@ -1,0 +1,48 @@
+name: CI
+
+# =====================================================================
+# CI · Nefrance
+# ---------------------------------------------------------------------
+# Roda em todo push pra main/master + em todo PR aberto.
+# Pipeline: install → lint → build. Falha bloqueia merge se o branch
+# tiver protection rules ativadas em Settings → Branches.
+# =====================================================================
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+# Cancela runs antigos do mesmo branch quando um novo push chega
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Lint & build
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+        env:
+          # Não há env vars reais — o site é estático. Apenas garantia.
+          NODE_ENV: production

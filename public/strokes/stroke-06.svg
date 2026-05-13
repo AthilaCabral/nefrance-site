@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Wave de 3 ondas — fluido -->
+  <path d="M8 38 Q22 28, 36 38 T64 38 T92 38" stroke="#C97F5A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8"/>
+  <path d="M8 56 Q22 46, 36 56 T64 56 T92 56" stroke="#1F3A3D" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+  <path d="M8 74 Q22 64, 36 74 T64 74 T92 74" stroke="#8B9D83" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+</svg>

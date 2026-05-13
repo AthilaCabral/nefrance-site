@@ -1,36 +1,52 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+# ---------- dependencies ----------
 /node_modules
 /.pnp
 .pnp.js
 .yarn/install-state.gz
 
-# testing
+# ---------- testing ----------
 /coverage
 
-# next.js
+# ---------- next.js ----------
 /.next/
 /out/
 
-# production
+# ---------- production builds ----------
 /build
 
-# misc
+# ---------- OS / editor ----------
 .DS_Store
+Thumbs.db
 *.pem
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
 
-# debug
+# ---------- debug logs ----------
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
-# local env files
+# ---------- env (NUNCA commitar) ----------
+.env
 .env*.local
 
-# vercel
+# ---------- vercel ----------
 .vercel
 
-# typescript
+# ---------- typescript ----------
 *.tsbuildinfo
 next-env.d.ts
+
+# ---------- claude code / council ----------
+# Plugin claude-council foi clonado localmente e instalado em ~/.claude/plugins/
+# Não commitamos o clone — esta regra fica como guard caso alguém volte a clonar aqui.
+/claude-council/
+# Cache de respostas do council (gerado em runtime)
+/.claude/council-cache/
+# Memória/notas privadas do Claude Code (se aparecerem aqui)
+/.claude/memory/
