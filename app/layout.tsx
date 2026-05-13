@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Plus_Jakarta_Sans, DM_Sans } from "next/font/google";
 import { medicalClinicJsonLd } from "@/lib/jsonld";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 // =====================================================================
@@ -39,7 +40,7 @@ const mono = localFont({
 // SEO / METADATA — editar título, descrição e keywords aqui
 // =====================================================================
 export const metadata: Metadata = {
-  metadataBase: new URL("https://institutonefrance.com.br"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default:
       "Instituto Nefrance · Neuropsicopedagogia e Reforço Escolar em Goiânia",
