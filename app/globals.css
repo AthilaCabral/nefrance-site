@@ -5,43 +5,36 @@
 /* =====================================================================
    NEFRANCE · GLOBALS · Soft Structuralism Edition
    ---------------------------------------------------------------------
-   1. Paleta — tokens semânticos (canvas/surface/ink/petrol/terra/sage).
-   2. Tipografia — Plus Jakarta Sans (display) + DM Sans (body).
-   3. Motion — easings cubic-bezier premium (Apple-grade).
-   4. Materials — sombras superdifusas, hairlines coloridas, grain global.
-   5. Utilities — .bezel (double-bezel architecture), .ring-hairline.
+   IMPORTANTE: as cores estão em formato TRIPLET RGB (sem vírgulas) pra
+   o Tailwind 3 conseguir aplicar opacity modifiers (text-canvas/70 etc).
+   Sempre que precisar de cor sólida em CSS direto, use:
+     color: rgb(var(--canvas));
+   Pra cor com opacidade:
+     color: rgb(var(--canvas) / 0.7);
    ===================================================================== */
 
 :root {
-  /* ----- Surfaces (Soft Structuralism layer stack) ----- */
-  --canvas: #FAF8F4;       /* fundo principal — creme calçada */
-  --canvas-warm: #F1ECE2;  /* fundo levemente afundado — creme quente */
-  --surface: #FFFFFF;      /* cards flutuantes — branco puro elevado */
-  --surface-soft: #F7F5F0; /* cards afundados — abaixo do canvas */
+  /* ----- Surfaces ----- */
+  --canvas: 250 248 244;          /* #FAF8F4 — creme calçada */
+  --canvas-warm: 241 236 226;     /* #F1ECE2 — creme quente */
+  --surface: 255 255 255;         /* #FFFFFF — branco puro */
+  --surface-soft: 247 245 240;    /* #F7F5F0 — afundado */
 
   /* ----- Type ----- */
-  --ink: #1C1A17;          /* texto principal — carvão quente (NUNCA #000) */
-  --stone: #5C5750;        /* texto secundário — pedra */
-  --whisper: #A8A39A;      /* texto terciário/captions — quase divisor */
+  --ink: 28 26 23;                /* #1C1A17 — carvão quente */
+  --stone: 92 87 80;              /* #5C5750 — pedra */
+  --whisper: 168 163 154;         /* #A8A39A — sussurro */
 
   /* ----- Accents ----- */
-  --petrol: #1F3A3D;       /* acento primário — confiança clínica */
-  --terra: #C97F5A;        /* acento humano — terracota suave */
-  --sage: #8B9D83;         /* acento sutil — sálvia dessaturada */
-  --sand: #D4C9B5;         /* divisores / fios — areia */
+  --petrol: 31 58 61;             /* #1F3A3D — petróleo */
+  --terra: 201 127 90;            /* #C97F5A — terracota */
+  --sage: 139 157 131;            /* #8B9D83 — sálvia */
+  --sand: 212 201 181;            /* #D4C9B5 — areia */
 
-  /* ----- Aliases legados (compat /cha-das-maes) ----- */
-  --off-white: var(--canvas);
-  --bone: var(--canvas-warm);
-  --chocolate: var(--ink);
-  --terracota: var(--terra);
-  --salvia: var(--sage);
-  --champagne: var(--petrol);
-
-  /* ----- Motion easings (premium spring physics em CSS) ----- */
-  --ease-out-soft: cubic-bezier(0.32, 0.72, 0, 1);     /* default — Apple-tier */
-  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);  /* leve overshoot */
-  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1); /* in-out denso */
+  /* ----- Motion easings (Apple-tier spring physics em CSS) ----- */
+  --ease-out-soft: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 
   /* ----- Shadow stack (diffused ambient, tinted petrol) ----- */
   --shadow-soft: 0 1px 2px rgba(31, 58, 61, 0.04),
@@ -59,8 +52,8 @@ html {
 }
 
 body {
-  background: var(--canvas);
-  color: var(--ink);
+  background: rgb(var(--canvas));
+  color: rgb(var(--ink));
   font-family: var(--font-body), system-ui, sans-serif;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -70,19 +63,18 @@ body {
 }
 
 ::selection {
-  background: var(--petrol);
-  color: var(--canvas);
+  background: rgb(var(--petrol));
+  color: rgb(var(--canvas));
 }
 
 :focus-visible {
-  outline: 2px solid var(--petrol);
+  outline: 2px solid rgb(var(--petrol));
   outline-offset: 3px;
   border-radius: 2px;
 }
 
 /* =====================================================================
    GLOBAL GRAIN — fixed, pointer-events-none, fora do scroll
-   Aplica película de papel sutil ao site inteiro sem matar GPU.
    ===================================================================== */
 body::before {
   content: "";
@@ -94,7 +86,6 @@ body::before {
   mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
-/* Conteúdo precisa ficar acima do grão */
 body > * {
   position: relative;
   z-index: 2;
@@ -105,35 +96,33 @@ body > * {
   .text-pretty { text-wrap: pretty; }
 
   /* ---------- Double-Bezel (Doppelrand) Architecture ---------- */
-  /* Aplicar em wrappers de cards/inputs/containers premium.        */
-  /* Estrutura: <div className="bezel"><div className="bezel-inner">...</div></div> */
   .bezel {
-    background: linear-gradient(180deg, rgba(31,58,61,0.04), rgba(31,58,61,0.02));
-    border: 1px solid rgba(31, 58, 61, 0.06);
+    background: linear-gradient(180deg, rgb(var(--petrol) / 0.04), rgb(var(--petrol) / 0.02));
+    border: 1px solid rgb(var(--petrol) / 0.06);
     border-radius: 2rem;
     padding: 0.375rem;
     box-shadow: var(--shadow-soft);
   }
   .bezel-inner {
-    background: var(--surface);
+    background: rgb(var(--surface));
     border-radius: calc(2rem - 0.375rem);
     box-shadow: var(--shadow-inset-highlight);
     overflow: hidden;
   }
   .bezel-dark {
-    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.02));
+    border: 1px solid rgb(255 255 255 / 0.08);
     border-radius: 2rem;
     padding: 0.375rem;
   }
   .bezel-dark .bezel-inner {
-    background: var(--ink);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    background: rgb(var(--ink));
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06);
   }
 
   /* ---------- Hairlines tinted ---------- */
-  .ring-hairline { box-shadow: inset 0 0 0 1px rgba(31, 58, 61, 0.08); }
-  .ring-hairline-strong { box-shadow: inset 0 0 0 1px rgba(31, 58, 61, 0.14); }
+  .ring-hairline { box-shadow: inset 0 0 0 1px rgb(var(--petrol) / 0.08); }
+  .ring-hairline-strong { box-shadow: inset 0 0 0 1px rgb(var(--petrol) / 0.14); }
 
   /* ---------- Eyebrow pill (badge pré-H1/H2) ---------- */
   .eyebrow-pill {
@@ -142,26 +131,26 @@ body > * {
     gap: 0.5rem;
     padding: 0.375rem 0.875rem;
     border-radius: 9999px;
-    background: var(--surface);
-    box-shadow: inset 0 0 0 1px rgba(31, 58, 61, 0.08), 0 1px 2px rgba(31, 58, 61, 0.04);
+    background: rgb(var(--surface));
+    box-shadow: inset 0 0 0 1px rgb(var(--petrol) / 0.08), 0 1px 2px rgb(var(--petrol) / 0.04);
     font-family: var(--font-mono), ui-monospace, monospace;
     font-size: 10px;
     line-height: 1.2;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--stone);
+    color: rgb(var(--stone));
   }
   .eyebrow-pill::before {
     content: "";
     width: 6px; height: 6px; border-radius: 9999px;
-    background: var(--petrol);
+    background: rgb(var(--petrol));
   }
   .eyebrow-pill-dark {
-    background: rgba(255, 255, 255, 0.06);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.7);
+    background: rgb(255 255 255 / 0.06);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.1);
+    color: rgb(255 255 255 / 0.7);
   }
-  .eyebrow-pill-dark::before { background: var(--terra); }
+  .eyebrow-pill-dark::before { background: rgb(var(--terra)); }
 
   /* ---------- Floating shadows ---------- */
   .shadow-soft { box-shadow: var(--shadow-soft); }
@@ -177,7 +166,7 @@ body > * {
     font-family: var(--font-display), system-ui, sans-serif;
     font-weight: 600;
     letter-spacing: -0.025em;
-    color: var(--ink);
+    color: rgb(var(--ink));
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;

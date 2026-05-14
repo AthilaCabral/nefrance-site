@@ -2,7 +2,11 @@ import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
 
 // =====================================================================
-// TAILWIND CONFIG · Nefrance · Soft Structuralism Edition
+// TAILWIND CONFIG · Nefrance · Soft Structuralism
+// ---------------------------------------------------------------------
+// As cores usam o formato `rgb(var(--xxx) / <alpha-value>)` — assim
+// classes como `text-canvas/70` ou `bg-ink/40` funcionam corretamente
+// (CSS vars precisam estar em triplet RGB no globals.css).
 // =====================================================================
 
 const config: Config = {
@@ -14,24 +18,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        canvas: "var(--canvas)",
-        "canvas-warm": "var(--canvas-warm)",
-        surface: "var(--surface)",
-        "surface-soft": "var(--surface-soft)",
-        ink: "var(--ink)",
-        stone: "var(--stone)",
-        whisper: "var(--whisper)",
-        petrol: "var(--petrol)",
-        terra: "var(--terra)",
-        sage: "var(--sage)",
-        sand: "var(--sand)",
-        // Aliases legados
-        "off-white": "var(--canvas)",
-        bone: "var(--canvas-warm)",
-        chocolate: "var(--ink)",
-        terracota: "var(--terra)",
-        salvia: "var(--sage)",
-        champagne: "var(--petrol)",
+        canvas: "rgb(var(--canvas) / <alpha-value>)",
+        "canvas-warm": "rgb(var(--canvas-warm) / <alpha-value>)",
+        surface: "rgb(var(--surface) / <alpha-value>)",
+        "surface-soft": "rgb(var(--surface-soft) / <alpha-value>)",
+        ink: "rgb(var(--ink) / <alpha-value>)",
+        stone: "rgb(var(--stone) / <alpha-value>)",
+        whisper: "rgb(var(--whisper) / <alpha-value>)",
+        petrol: "rgb(var(--petrol) / <alpha-value>)",
+        terra: "rgb(var(--terra) / <alpha-value>)",
+        sage: "rgb(var(--sage) / <alpha-value>)",
+        sand: "rgb(var(--sand) / <alpha-value>)",
+        // Aliases legados (compat /cha-das-maes)
+        "off-white": "rgb(var(--canvas) / <alpha-value>)",
+        bone: "rgb(var(--canvas-warm) / <alpha-value>)",
+        chocolate: "rgb(var(--ink) / <alpha-value>)",
+        terracota: "rgb(var(--terra) / <alpha-value>)",
+        salvia: "rgb(var(--sage) / <alpha-value>)",
+        champagne: "rgb(var(--petrol) / <alpha-value>)",
       },
       fontFamily: {
         display: ["var(--font-display)", "system-ui", "sans-serif"],
